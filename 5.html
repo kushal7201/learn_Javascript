@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Variables</title>
+</head>
+<body>
+    <h3>Cart Quantity</h3>
+    <button onclick='alert(`Items: (${quant})`)'>Show Quantity</button>
+    <button onclick="alert(`Added!`)">Add to Cart</button>
+    <button onclick="quant+=2">+2</button>
+    <button onclick="quant+=3">+3</button>
+    <button onclick="quant= 0">Reset Cart</button>
+    <script>
+       let quant= 0;
+       console.log(typeof quant);
+        
+    </script>
+</body>
+</html>
