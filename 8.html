@@ -3,11 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Objects and Json</title>
 </head>
 <body>
     <script>
-        
+        obj = {
+            name: 'product',
+            time: 192,
+            stars:{
+                new: "a2",
+                naya: "ar",
+                func: function add(){
+                    console.log("Just a random function");
+                }
+            }
+        };
+        // console.log(typeof obj.stars.func);
+        // JSON: JS Object Notation--> Universal Onject for all languages
+        // has less features: function not allowed, single quotes allowed and mandatory for property also
+        // JSON.stringify(obj) // Convert object to json;
+        console.log(typeof JSON.stringify(obj)) // string
+        let jsonString = JSON.stringify(obj);
+        JSON.parse(jsonString);
+        console.log(JSON.parse(jsonString));
+
+        obj1 = { // objects are just reference to actual memory
+            message: "Hello World!",
+        }
+        obj2 = obj1  // same reference to the actual mmemory
+        obj3 = {
+            message: "Hello World!",
+        }
+        console.log(obj1==obj2); // true- same refrence
+        console.log(obj1==obj3); // false- diff reference
+
+        product1 = {
+            name: "PRod",
+            price: 2999,
+            expiry: "12 months"
+        }
+
+        // let name = product1.name;
+        let {name, price, expiry} = product1; // Destructring objects
+        console.log(name,price,expiry)
+
+        let obj4 = {
+            // name: name,
+            name,
+            // method: function func1(){
+            //     console.log("HII THERE!");
+            // }
+            method(){
+                console.log("HII THERE!");
+            }
+        }
+
+        console.log(obj4)
     </script>
 </body>
 </html>

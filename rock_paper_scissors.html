@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors</title>
+    <style>
+        body{
+            color: white;
+            background-color: rgb(25,25,25);
+            font-family: Arial, Helvetica, sans-serif;
+            margin-left: 30px;
+        }
+        .move-icon{
+            width: 50px;
+        }
+        .move-button{
+            background-color: transparent;
+            border: 3px solid white;
+            padding: 30px;
+            border-radius: 60px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+        .result{
+            font-size: 20px;
+            margin-top: 50px;
+        }
+        .score{
+            margin-top: 40px;
+        }
+        .reset{
+            padding: 10px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            font-size: 15px;
+        }
+    </style>
+</head>
+<body>
+    <p style="font-size: 35px;">Rock-Paper-Scissors</p>
+
+    <button class = "move-button" onclick="
+    playGame(1);
+    "><img src="images\rock-emoji.png" class = "move-icon"alt="Rock"></button>
+
+    <button class = "move-button" onclick="
+    playGame(2);
+    "><img src="images\paper-emoji.png" class = "move-icon"alt="Paper"></button>
+
+    <button class = "move-button" onclick="
+    playGame(3);
+    "><img src="images\Scissors-emoji.png" class = "move-icon"alt="Scissors"></button>
+
+    <p class="js-result result"></p>
+    <p class="js-moves"></p>
+    <p class="js-score score"></p>
+
+    <button class="reset" onclick="
+    score.wins=score.losses=score.ties= 0;
+    localStorage.removeItem('score');
+    console.log(`Score is resetted:`);
+    console.log(score);
+    resetfull();
+    ">Reset Score</button>
+    
+    <script>
+        score = JSON.parse(localStorage.getItem('score')) || {
+            wins: 0,
+            losses: 0,
+            ties:0
+        };
+
+        /*
+        if(score==null){   // OR:   if(!score){}
+            score = {
+                wins: 0,
+                losses: 0,
+                ties:0
+            }
+        }
+        */
+       
+        updateScore();
+
+        function playGame(value){
+            user = value;
+            num = Math.random();
+            setvalue(num);
+            userSel = setstring(user);
+            compSel = setstring(comp);
+            result= judge(user, comp);
+            if(result=="You WIN!") score.wins++;
+            else if(result=="You LOSE!") score.losses++;
+            else score.ties++;
+            
+            console.log(score);
+
+            localStorage.setItem('score', JSON.stringify(score))
+            getResult();
+            getMoves();
+            updateScore();
+        }
+        
+        let num; // 0 to < 1
+        let user;
+        let comp; // 1-Rock, 2-Paper, 3-Scissors
+        let userSel, compSel, result;
+
+        function getResult(){
+            document.querySelector('.js-result').innerHTML = `<b>${result}</b>`;
+        }
+        function getMoves(){
+            document.querySelector('.js-moves').innerHTML = `(You)
+        <img class="move-icon" src="images\\${userSel}-emoji.png" alt="">
+        VS
+        <img class="move-icon"  src="images\\${compSel}-emoji.png" alt="">
+        (Computer)`;
+        }
+        function resetfull(){
+            document.querySelector('.js-result').innerHTML = '';
+            document.querySelector('.js-moves').innerHTML = '';
+            updateScore();
+        }
+        function updateScore(){
+            document.querySelector('.js-score').innerHTML =`Wins: ${score.wins} , Losses: ${score.losses} , Ties: ${score.ties}`;
+        }
+        function setvalue(num){
+            if(num>=0 && num <1/3) comp = 1;
+            else if(num>=1/3 && num<2/3) comp = 2;
+            else comp = 3;
+        }
+        function setstring(value){
+            let choose;
+            if(value==1) choose = 'Rock';
+            else if(value==2) choose = 'Paper';
+            else choose= 'Scissors';
+            return choose;
+        }
+        function judge(user, comp){
+            let ans;
+            if(user==comp) ans = "TIE!";
+            else{
+                if(user==1){
+                    if(comp==2) ans = "You LOSE!";
+                    else ans = "You WIN!";
+                }
+                else if(user==2){
+                    if(comp==3) ans = "You LOSE!";
+                    else ans = "You WIN!";
+                }
+                else{
+                    if(comp==1) ans = "You LOSE!";
+                    else ans = "You WIN!";
+                }
+            }
+            return ans;
+        }
+    </script>
+</body>
+</html>
