@@ -37,7 +37,7 @@ function playGame(value){
 
 let num; // 0 to < 1
 let user;
-let comp; // 1-Rock, 2-Paper, 3-Scissors
+let comp; // 1-rock, 2-paper, 3-scissors
 let userSel, compSel, result;
 
 function getResult(){
@@ -65,9 +65,9 @@ function setvalue(num){
 }
 function setstring(value){
     let choose;
-    if(value==1) choose = 'Rock';
-    else if(value==2) choose = 'Paper';
-    else choose= 'Scissors';
+    if(value==1) choose = 'rock';
+    else if(value==2) choose = 'paper';
+    else choose= 'scissors';
     return choose;
 }
 function judge(user, comp){
